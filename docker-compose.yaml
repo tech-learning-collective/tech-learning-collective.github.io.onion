@@ -1,0 +1,26 @@
+---
+version: "3.5"
+services:
+    ssg:
+        build:
+            context: ./ssg-build
+        volumes:
+            - "./src:/srv/jekyll:rw"
+        command: ["jekyll", "build", "--future"]
+
+    web:
+        image: nginx:alpine
+        volumes:
+            - "./src/_site:/usr/share/nginx/html:ro"
+            - "./web/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro"
+        ports:
+            - "127.0.0.1:8011:80"
+        depends_on:
+            - ssg
+
+    tor:
+        image: goldy/tor-hidden-service
+        environment:
+            WEB_TOR_SERVICE_HOSTS: "80:web:80"
+            WEB_TOR_SERVICE_VERSION: 3
+            WEB_TOR_SERVICE_KEY: "${WEB_TOR_SERVICE_KEY}"

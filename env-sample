@@ -1,0 +1,3 @@
+# Set a persistent private key for the Tor Onion service. This value
+# is Base64-encoded.
+WEB_TOR_SERVICE_KEY="<BASE64_ENCODED_TOR_V3_ONION_SERVICE_PRIVATE_KEY_FILE>"
