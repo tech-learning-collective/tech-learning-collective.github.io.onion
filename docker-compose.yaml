@@ -35,4 +35,4 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         restart: on-failure
         # Schedule updates for 1:30 AM on 15th day of every 2nd month.
-        command: --schedule "0 30 1 15 */2 0" --cleanup --label-enable
+        command: --schedule "0 30 1 15 */2 *" --cleanup --label-enable
