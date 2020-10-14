@@ -1,10 +1,11 @@
 # Tech Learning Collective's Onion site
 
-This repository provides an automated build of the public [Tech Learning Collective Web site](https://techlearningcollective.com/) that is pre-configured to run as a [Tor Onion service](https://community.torproject.org/onion-services/), inside [Docker](https://www.docker.com/) containers, using a [Docker Compose](https://docs.docker.com/compose/) configuration. The configuration provides three services:
+This repository provides an automated build of the public [Tech Learning Collective Web site](https://techlearningcollective.com/) that is pre-configured to run as a [Tor Onion service](https://community.torproject.org/onion-services/), inside [Docker](https://www.docker.com/) containers, using a [Docker Compose](https://docs.docker.com/compose/) configuration. The configuration provides three main services, and one ancillary service:
 
 * `ssg`, the [static site generator](https://www.staticgen.com/), takes the public Web site's [Jekyll](https://jekyllrb.com/) templates and runs them through [`jekyll build`](https://jekyllrb.com/docs/usage/) to generate the site's complete HTML, JavaScript, and CSS source code files.
 * `web`, the HTTP server, is a simple [Nginx](https://www.nginx.com/) container that serves the static files generated earlier. The `ssg` and `web` services share a subset of files so that whenever the `ssg` container builds new source code, the Web server begins serving them.
 * `tor`, the Tor Onion service server, provides a gateway to the Web server via a reverse proxy from the [Tor](https://torproject.org/) network. This makes it possible to serve the Web site from a computer behind a NAT or a strict firewall, as long as it can make a connection to the Tor network.
+* `watchtower`, the ancillary service included to ensure that the base container image of the `web` and `tor` services are updated in a reasonable timeframe after updates and patches are made available for them, without requiring any further action on the part of human operators.
 
 All of these are technologies that Tech Learning Collective instructors teach during [courses](https://techlearningcollective.com/courses/) and [workshops](https://techlearningcollective.com/workshops/). Please check us out if you want to learn more!
 
