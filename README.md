@@ -76,6 +76,16 @@ This will build all three containers, create a network for them to connect to on
 > ```
 >
 > ...try running the command with elevated privileges, such as with the `sudo` command, `sudo docker-compose up`, if you're on Linux.
+>
+> :bulb: After you run this command, your terminal will be "[`attach`](https://docs.docker.com/engine/reference/commandline/attach/)ed" to the running containers. This means that instead of returning to your shell's command prompt after the containers finish starting up, you will instead see their standard output and standard error data streams displayed on your terminal. To return to your terminal prompt, press `CTRL-C` (`^C`) to send the normal interrupt signal to the container. This will also cause the container to stop, though.
+>
+> To bring the containers up while keeping your terminal unattached, use the `--detach` or `-d` flag when you [invoke `docker-compose up`](https://docs.docker.com/compose/reference/up/), like this:
+>
+> ```sh
+> docker-compose up --detach
+> ```
+>
+> Bringing the containers up in this `--detach`ed way means you will also need to use the `docker-compose logs` command to view the output described next.
 
 You'll see a *lot* of output scroll by as the containers start up and do their thing. Some important lines to notice are:
 
@@ -88,7 +98,7 @@ You'll see a *lot* of output scroll by as the containers start up and do their t
     ```
     techlearningcollectivegithubioonion_ssg_1 exited with code 0
     ```
-    When a computer program exits "with code `0`" (zero), it's telling that it thinks it's done its job successfully. Don't be disappointed if the Onion site doesn't show up exactly right until you see this line appear. It can take some time!
+    When a computer program exits "with code `0`" (zero), it's telling you that it thinks it's done its job successfully. Don't be disappointed if the Onion site doesn't show up exactly right until you see this line appear. It can take some time!
 
 That's it! You're running a copy of our public Web site as a Tor Onion site. You've just made the Dark Web a little bit bigger, and a little bit queerer. :)
 
