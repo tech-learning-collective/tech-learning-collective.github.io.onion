@@ -17,6 +17,7 @@ services:
             - ssg
         labels:
             - com.centurylinklabs.watchtower.enable=true
+        restart: always
 
     tor:
         image: goldy/tor-hidden-service
@@ -26,6 +27,7 @@ services:
             WEB_TOR_SERVICE_KEY: "${WEB_TOR_SERVICE_KEY}"
         labels:
             - com.centurylinklabs.watchtower.enable=true
+        restart: always
 
     # Watchtower ensures that the `watchtower.enable`'d containers are
     # automatically restarted from newly pulled (updated) base images.
